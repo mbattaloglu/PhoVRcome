@@ -7,7 +7,7 @@ EditorBuildSettings:
   m_Scenes:
   - enabled: 1
     path: Assets/Scenes/MenuScene.unity
-    guid: 9fc0d4010bbf28b4594072e72b8655ab
+    guid: 7cb4fb24c7daad645b3576c97abb3f20
   - enabled: 1
     path: Assets/Scenes/Phobia1Scene.unity
     guid: 8140176ddef8a4b4582d25d9414abdf2
