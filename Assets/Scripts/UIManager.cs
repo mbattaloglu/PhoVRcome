@@ -1,18 +1,33 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class UIManager : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    public GameObject MainMenu;
+    public GameObject SelectionMenu;
+    public void GoSelectionMenuOnClick()
     {
-        
+        MainMenu.SetActive(false);
+        SelectionMenu.SetActive(true);
     }
 
-    // Update is called once per frame
-    void Update()
+    public void GoPhobia1SceneOnClick()
     {
-        
+        SceneManager.LoadScene("Phobia1Scene");
+    }
+
+    public void GoPhobia2SceneOnClick()
+    {
+        SceneManager.LoadScene("Phobia2Scene");
+    }
+
+    public void GoPhobia3SceneOnClick()
+    {
+        SceneManager.LoadScene("Phobia3Scene");
+    }
+
+    public void QuitGameOnClick()
+    {
+        Application.Quit();
     }
 }
