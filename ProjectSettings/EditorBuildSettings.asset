@@ -4,20 +4,8 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes:
-  - enabled: 1
-    path: Assets/Scenes/MenuScene.unity
-    guid: 7cb4fb24c7daad645b3576c97abb3f20
-  - enabled: 1
-    path: Assets/Scenes/Phobia1Scene.unity
-    guid: 8140176ddef8a4b4582d25d9414abdf2
-  - enabled: 1
-    path: Assets/Scenes/Phobia2Scene.unity
-    guid: cbd2f6b25b8a32143bd2803a200b2774
-  - enabled: 1
-    path: Assets/Scenes/Phobia3Scene.unity
-    guid: 96651bda8bf06ff4fbbdf1031b14f0d3
+  m_Scenes: []
   m_configObjects:
-    Unity.XR.Oculus.Settings: {fileID: 11400000, guid: 960801f7c0ad0144092c12f375490ad7, type: 2}
-    com.unity.xr.management.loader_settings: {fileID: 11400000, guid: be9d33b7e82028043ab7ae6325a38161, type: 2}
-    xr.sdk.mock-hmd.settings: {fileID: 11400000, guid: 51d235bd5806d724f809147d60c73802, type: 2}
+    com.unity.xr.management.loader_settings: {fileID: 11400000, guid: 91e795fc8dfd4af428c2e98995bb8ef8, type: 2}
+    com.unity.xr.openxr.settings4: {fileID: 11400000, guid: 3f72f21bf84d7394386c589b242aaef1, type: 2}
+    xr.sdk.mock-hmd.settings: {fileID: 11400000, guid: 51eeb98260c35b64291b8adecda0058f, type: 2}
