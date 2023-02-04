@@ -4,7 +4,19 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/MenuScene.unity
+    guid: 4b5751ca1ca014a459625509e289bf01
+  - enabled: 1
+    path: Assets/Scenes/Phobia1Scene.unity
+    guid: 77adf31bbeb56fa4d943c68c1c0ae537
+  - enabled: 1
+    path: Assets/Scenes/Phobia2Scene.unity
+    guid: 0ea7088200546fa46902b6a7bad66c49
+  - enabled: 1
+    path: Assets/Scenes/Phobia3Scene.unity
+    guid: c5451442f55b6254a992c3daa1c092ab
   m_configObjects:
     com.unity.xr.management.loader_settings: {fileID: 11400000, guid: 91e795fc8dfd4af428c2e98995bb8ef8, type: 2}
     com.unity.xr.openxr.settings4: {fileID: 11400000, guid: 3f72f21bf84d7394386c589b242aaef1, type: 2}
