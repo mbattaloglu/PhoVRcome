@@ -1,12 +1,11 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class WindowInteractor : MonoBehaviour
+public class DrawerXAxisInteractor : MonoBehaviour
 {
     public Animator animator;
-    public Transform player;
     private bool isOpen;
+    public Transform player;
 
     private void Start()
     {
@@ -16,7 +15,7 @@ public class WindowInteractor : MonoBehaviour
     public void Interact()
     {
         float dist = Vector3.Distance(player.position, transform.position);
-        if (dist < 15)
+        if (dist < 10)
         {
             switch (isOpen)
             {
@@ -34,14 +33,14 @@ public class WindowInteractor : MonoBehaviour
 
     IEnumerator Open()
     {
-        animator.Play("Openingwindow");
+        animator.Play("openpull_01");
         isOpen = true;
         yield return new WaitForSeconds(.5f);
     }
 
     IEnumerator Close()
     {
-        animator.Play("Closingwindow");
+        animator.Play("closepush_01");
         isOpen = false;
         yield return new WaitForSeconds(.5f);
     }

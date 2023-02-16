@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DoorInteractor : MonoBehaviour
+public class LeftDoorInteractor : MonoBehaviour
 {
     public Animator animator;
     public Transform player;
@@ -15,22 +15,19 @@ public class DoorInteractor : MonoBehaviour
 
     public void Interact()
     {
-        if (player)
+        float dist = Vector3.Distance(player.position, transform.position);
+        if (dist < 15)
         {
-            float dist = Vector3.Distance(player.position, transform.position);
-            if (dist < 15)
+            switch (isOpen)
             {
-                Debug.Log("Distance is " + dist);
-                Debug.Log("Player position: " + player.position);
-                Debug.Log("Door position: " + transform.position);
-                if (!isOpen)
-                {
-                    StartCoroutine(Open());
-                }
-                else
-                {
+                case true:
                     StartCoroutine(Close());
-                }
+                    break;
+                case false:
+                    StartCoroutine(Open());
+                    break;
+                default:
+                    break;
             }
         }
     }
@@ -41,7 +38,7 @@ public class DoorInteractor : MonoBehaviour
         isOpen = true;
         yield return new WaitForSeconds(.5f);
     }
-    
+
     IEnumerator Close()
     {
         animator.Play("Closing");

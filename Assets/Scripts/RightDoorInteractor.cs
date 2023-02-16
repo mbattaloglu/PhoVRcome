@@ -1,8 +1,7 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using System.Collections;
 
-public class WindowInteractor : MonoBehaviour
+public class RightDoorInteractor : MonoBehaviour
 {
     public Animator animator;
     public Transform player;
@@ -34,14 +33,14 @@ public class WindowInteractor : MonoBehaviour
 
     IEnumerator Open()
     {
-        animator.Play("Openingwindow");
+        animator.Play("Opening 1");
         isOpen = true;
         yield return new WaitForSeconds(.5f);
     }
 
     IEnumerator Close()
     {
-        animator.Play("Closingwindow");
+        animator.Play("Closing 1");
         isOpen = false;
         yield return new WaitForSeconds(.5f);
     }
