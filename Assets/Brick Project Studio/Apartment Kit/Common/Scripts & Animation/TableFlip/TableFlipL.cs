@@ -1,56 +1,51 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.XR.Interaction.Toolkit;
 
-public class TableFlipL: MonoBehaviour {
+public class TableFlipL : MonoBehaviour
+{
+    private Animator animator;
+    private bool isOpen;
+    private Transform player;
 
-	public Animator FlipL;
-	public bool open;
-	public Transform Player;
+    private void Start()
+    {
+        isOpen = false;
+		gameObject.AddComponent<XRSimpleInteractable>();
+		animator = GetComponent<Animator>();
+		player = GameObject.FindWithTag("Player").transform;
+		GetComponent<XRSimpleInteractable>().activated.AddListener(Interact);
+    }
 
-	void Start (){
-		open = false;
-	}
-
-	void OnMouseOver (){
+    private void Interact(ActivateEventArgs arg0)
+    {
+		float dist = Vector3.Distance(player.position, transform.position);
+		if (dist < 15)
 		{
-			if (Player) {
-				float dist = Vector3.Distance (Player.position, transform.position);
-				if (dist < 15) {
-					if (open == false) {
-						if (Input.GetMouseButtonDown (0)) {
-							StartCoroutine (opening ());
-						}
-					} else {
-						if (open == true) {
-							if (Input.GetMouseButtonDown (0)) {
-								StartCoroutine (closing ());
-							}
-						}
-
-					}
-
-				}
+			switch (isOpen)
+			{
+				case true:
+					StartCoroutine(Close());
+					break;
+				case false:
+					StartCoroutine(Open());
+					break;
 			}
-
 		}
+    }
 
-	}
+    private IEnumerator Open()
+    {
+        animator.Play("Lup");
+        isOpen = true;
+        yield return new WaitForSeconds(.5f);
+    }
 
-	IEnumerator opening(){
-		print ("you are opening the door");
-        FlipL.Play ("Lup");
-		open = true;
-		yield return new WaitForSeconds (.5f);
-	}
-
-	IEnumerator closing(){
-		print ("you are closing the door");
-        FlipL.Play ("Ldown");
-		open = false;
-		yield return new WaitForSeconds (.5f);
-	}
-
-
+    private IEnumerator Close()
+    {
+        animator.Play("Ldown");
+        isOpen = false;
+        yield return new WaitForSeconds(.5f);
+    }
 }
 

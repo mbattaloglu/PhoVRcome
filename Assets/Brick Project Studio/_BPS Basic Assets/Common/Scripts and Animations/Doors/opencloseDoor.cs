@@ -1,72 +1,55 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.XR.Interaction.Toolkit;
 
 namespace SojaExiles
-
 {
-	public class opencloseDoor : MonoBehaviour
-	{
+    public class opencloseDoor : MonoBehaviour
+    {
+        private Animator animator;
+        private bool isOpen;
+        private Transform player;
 
-		public Animator openandclose;
-		public bool open;
-		public Transform Player;
+        private void Start()
+        {
+            isOpen = false; 
+            gameObject.AddComponent<XRSimpleInteractable>();
+            animator = GetComponent<Animator>();
+            player = GameObject.FindWithTag("Player").transform;
+            GetComponent<XRSimpleInteractable>().activated.AddListener(Interact);
+        }
 
-		void Start()
-		{
-			open = false;
-		}
+        private void Interact(ActivateEventArgs arg0)
+        {
+            float dist = Vector3.Distance(player.position, transform.position);
+            if (dist < 15)
+            {
+                switch (isOpen)
+                {
+                    case true:
+                        StartCoroutine(Close());
+                        break;
+                    case false:
+                        StartCoroutine(Open());
+                        break;
+                }
+            }
+        }
 
-		void OnMouseOver()
-		{
-			{
-				if (Player)
-				{
-					float dist = Vector3.Distance(Player.position, transform.position);
-					if (dist < 15)
-					{
-						if (open == false)
-						{
-							if (Input.GetMouseButtonDown(0))
-							{
-								StartCoroutine(opening());
-							}
-						}
-						else
-						{
-							if (open == true)
-							{
-								if (Input.GetMouseButtonDown(0))
-								{
-									StartCoroutine(closing());
-								}
-							}
+        private IEnumerator Open()
+        {
+            print("you are opening the door");
+            animator.Play("Opening");
+            isOpen = true;
+            yield return new WaitForSeconds(.5f);
+        }
 
-						}
-
-					}
-				}
-
-			}
-
-		}
-
-		IEnumerator opening()
-		{
-			print("you are opening the door");
-			openandclose.Play("Opening");
-			open = true;
-			yield return new WaitForSeconds(.5f);
-		}
-
-		IEnumerator closing()
-		{
-			print("you are closing the door");
-			openandclose.Play("Closing");
-			open = false;
-			yield return new WaitForSeconds(.5f);
-		}
-
-
-	}
+        private IEnumerator Close()
+        {
+            print("you are closing the door");
+            animator.Play("Closing");
+            isOpen = false;
+            yield return new WaitForSeconds(.5f);
+        }
+    }
 }

@@ -1,74 +1,53 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.XR.Interaction.Toolkit;
 
 namespace SojaExiles
-
 {
+    public class Drawer_Pull_X : MonoBehaviour
+    {
+        private Animator animator;
+        private bool isOpen;
+        private Transform player;
 
-	public class Drawer_Pull_X : MonoBehaviour
-	{
+        private void Start()
+        {
+            isOpen = false;
+			gameObject.AddComponent<XRSimpleInteractable>();
+			animator = GetComponent<Animator>();
+			player = GameObject.FindWithTag("Player").transform;
+			GetComponent<XRSimpleInteractable>().activated.AddListener(Interact);
+        }
 
-		public Animator pull_01;
-		public bool open;
-		public Transform Player;
+        private void Interact(ActivateEventArgs arg0)
+        {
+            float dist = Vector3.Distance(player.position, transform.position);
+            if (dist < 15)
+            {
+                switch (isOpen)
+                {
+                    case true:
+                        StartCoroutine(Close());
+                        break;
+                    case false:
+                        StartCoroutine(Open());
+                        break;
+                }
+            }
+        }
 
-		void Start()
-		{
-			open = false;
-		}
+        private IEnumerator Open()
+        {
+            animator.Play("openpull_01");
+            isOpen = true;
+            yield return new WaitForSeconds(.5f);
+        }
 
-		void OnMouseOver()
-		{
-			{
-				if (Player)
-				{
-					float dist = Vector3.Distance(Player.position, transform.position);
-					if (dist < 10)
-					{
-						print("object name");
-						if (open == false)
-						{
-							if (Input.GetMouseButtonDown(0))
-							{
-								StartCoroutine(opening());
-							}
-						}
-						else
-						{
-							if (open == true)
-							{
-								if (Input.GetMouseButtonDown(0))
-								{
-									StartCoroutine(closing());
-								}
-							}
-
-						}
-
-					}
-				}
-
-			}
-
-		}
-
-		IEnumerator opening()
-		{
-			print("you are opening the door");
-			pull_01.Play("openpull_01");
-			open = true;
-			yield return new WaitForSeconds(.5f);
-		}
-
-		IEnumerator closing()
-		{
-			print("you are closing the door");
-			pull_01.Play("closepush_01");
-			open = false;
-			yield return new WaitForSeconds(.5f);
-		}
-
-
-	}
+        private IEnumerator Close()
+        {
+            animator.Play("closepush_01");
+            isOpen = false;
+            yield return new WaitForSeconds(.5f);
+        }
+    }
 }

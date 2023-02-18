@@ -1,72 +1,54 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.XR.Interaction.Toolkit;
 
 namespace SojaExiles
-
 {
 	public class opencloseDoor1 : MonoBehaviour
 	{
 
-		public Animator openandclose1;
-		public bool open;
-		public Transform Player;
+		private Animator animator;
+		private bool isOpen;
+		private Transform player;
 
-		void Start()
+		private void Start()
 		{
-			open = false;
+			isOpen = false;
+			gameObject.AddComponent<XRSimpleInteractable>();
+			animator = GetComponent<Animator>();
+			player = GameObject.FindWithTag("Player").transform;
+			GetComponent<XRSimpleInteractable>().activated.AddListener(Interact);
 		}
 
-		void OnMouseOver()
-		{
+        private void Interact(ActivateEventArgs arg0)
+        {
+            float dist = Vector3.Distance(player.position, transform.position);
+			if (dist < 15)
 			{
-				if (Player)
+				switch (isOpen)
 				{
-					float dist = Vector3.Distance(Player.position, transform.position);
-					if (dist < 15)
-					{
-						if (open == false)
-						{
-							if (Input.GetMouseButtonDown(0))
-							{
-								StartCoroutine(opening());
-							}
-						}
-						else
-						{
-							if (open == true)
-							{
-								if (Input.GetMouseButtonDown(0))
-								{
-									StartCoroutine(closing());
-								}
-							}
-
-						}
-
-					}
+					case true:
+						StartCoroutine(Close());
+						break;
+					case false:
+						StartCoroutine(Open());
+						break;
 				}
-
 			}
+        }
 
-		}
-
-		IEnumerator opening()
+        private IEnumerator Open()
 		{
-			print("you are opening the door");
-			openandclose1.Play("Opening 1");
-			open = true;
+			animator.Play("Opening 1");
+			isOpen = true;
 			yield return new WaitForSeconds(.5f);
 		}
 
-		IEnumerator closing()
+		private IEnumerator Close()
 		{
-			print("you are closing the door");
-			openandclose1.Play("Closing 1");
-			open = false;
+			animator.Play("Closing 1");
+			isOpen = false;
 			yield return new WaitForSeconds(.5f);
 		}
-
-
 	}
 }

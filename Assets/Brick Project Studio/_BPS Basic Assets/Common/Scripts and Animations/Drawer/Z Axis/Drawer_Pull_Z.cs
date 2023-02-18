@@ -1,73 +1,53 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.XR.Interaction.Toolkit;
 
 namespace SojaExiles
-
 {
 	public class Drawer_Pull_Z : MonoBehaviour
 	{
+		private Animator animator;
+		private bool isOpen;
+		private Transform player;
 
-		public Animator pull;
-		public bool open;
-		public Transform Player;
-
-		void Start()
+		private void Start()
 		{
-			open = false;
+			isOpen = false;
+			gameObject.AddComponent<XRSimpleInteractable>();
+			animator = GetComponent<Animator>();
+			player = GameObject.FindWithTag("Player").transform;
+			GetComponent<XRSimpleInteractable>().activated.AddListener(Interact);
 		}
 
-		void OnMouseOver()
+		private void Interact(ActivateEventArgs arg0)
 		{
+			float dist = Vector3.Distance(player.position, transform.position);
+			if (dist < 15)
 			{
-				if (Player)
+				switch (isOpen)
 				{
-					float dist = Vector3.Distance(Player.position, transform.position);
-					if (dist < 10)
-					{
-						print("object name");
-						if (open == false)
-						{
-							if (Input.GetMouseButtonDown(0))
-							{
-								StartCoroutine(opening());
-							}
-						}
-						else
-						{
-							if (open == true)
-							{
-								if (Input.GetMouseButtonDown(0))
-								{
-									StartCoroutine(closing());
-								}
-							}
-
-						}
-
-					}
+					case true:
+						StartCoroutine(Close());
+						break;
+					case false:
+						StartCoroutine(Open());
+						break;
 				}
-
 			}
-
 		}
 
-		IEnumerator opening()
+		private IEnumerator Open()
 		{
-			print("you are opening the door");
-			pull.Play("openpull");
-			open = true;
+			animator.Play("openpull");
+			isOpen = true;
 			yield return new WaitForSeconds(.5f);
 		}
 
-		IEnumerator closing()
+		private IEnumerator Close()
 		{
-			print("you are closing the door");
-			pull.Play("closepush");
-			open = false;
+			animator.Play("closepush");
+			isOpen = false;
 			yield return new WaitForSeconds(.5f);
 		}
-
-
 	}
 }

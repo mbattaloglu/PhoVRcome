@@ -1,72 +1,53 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.XR.Interaction.Toolkit;
 
 namespace SojaExiles
-
 {
-	public class BRGlassDoor : MonoBehaviour
-	{
+    public class BRGlassDoor : MonoBehaviour
+    {
+        private Animator animator;
+        private bool isOpen;
+        private Transform player;
 
-		public Animator openandclose;
-		public bool open;
-		public Transform Player;
+        private void Start()
+        {
+            isOpen = false;
+            gameObject.AddComponent<XRSimpleInteractable>();
+            animator = GetComponent<Animator>();
+            player = GameObject.FindWithTag("Player").transform;
+            GetComponent<XRSimpleInteractable>().activated.AddListener(Interact);
+        }
 
-		void Start()
-		{
-			open = false;
-		}
+        private void Interact(ActivateEventArgs arg0)
+        {
+            float dist = Vector3.Distance(player.position, transform.position);
+            if (dist < 15)
+            {
+                switch (isOpen)
+                {
+                    case true:
+                        StartCoroutine(Close());
+                        break;
+                    case false:
+                        StartCoroutine(Open());
+                        break;
+                }
+            }
+        }
+        
+        private IEnumerator Open()
+        {
+            animator.Play("BRGlassDoorOpen");
+            isOpen = true;
+            yield return new WaitForSeconds(.5f);
+        }
 
-		void OnMouseOver()
-		{
-			{
-				if (Player)
-				{
-					float dist = Vector3.Distance(Player.position, transform.position);
-					if (dist < 15)
-					{
-						if (open == false)
-						{
-							if (Input.GetMouseButtonDown(0))
-							{
-								StartCoroutine(opening());
-							}
-						}
-						else
-						{
-							if (open == true)
-							{
-								if (Input.GetMouseButtonDown(0))
-								{
-									StartCoroutine(closing());
-								}
-							}
-
-						}
-
-					}
-				}
-
-			}
-
-		}
-
-		IEnumerator opening()
-		{
-			print("you are opening");
-			openandclose.Play("BRGlassDoorOpen");
-			open = true;
-			yield return new WaitForSeconds(.5f);
-		}
-
-		IEnumerator closing()
-		{
-			print("you are closing");
-			openandclose.Play("BRGlassDoorClose");
-			open = false;
-			yield return new WaitForSeconds(.5f);
-		}
-
-
-	}
+        private IEnumerator Close()
+        {
+            animator.Play("BRGlassDoorClose");
+            isOpen = false;
+            yield return new WaitForSeconds(.5f);
+        }
+    }
 }
