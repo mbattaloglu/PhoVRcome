@@ -45,7 +45,6 @@ namespace SojaExiles
 
 		private IEnumerator Close()
 		{
-			print("you are closing the door");
 			animator.Play("ClosingStall");
 			isOpen = false;
 			yield return new WaitForSeconds(.5f);
