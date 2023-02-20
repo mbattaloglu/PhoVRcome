@@ -14,11 +14,21 @@ public class Phone : MonoBehaviour
 
     private void CloseFlash(SelectExitEventArgs arg0)
     {
+        if (NyctophobiaGameManager.GetInstance().isElectricCut)
+        {
+            NyctophobiaGameManager.GetInstance().taskType = NyctophobiaTaskList.PhoneDropped;
+            TaskManager.GetInstance().Initialize();
+        }
         flashLight.SetActive(false);
     }
 
     private void OpenFlash(SelectEnterEventArgs arg0)
     {
-        flashLight.SetActive(true);
+        if (NyctophobiaGameManager.GetInstance().isElectricCut)
+        {
+            NyctophobiaGameManager.GetInstance().taskType = NyctophobiaTaskList.PhoneFound;
+            TaskManager.GetInstance().Initialize();
+            flashLight.SetActive(true);
+        }
     }
 }

@@ -8,23 +8,23 @@ public class Checkpoint : MonoBehaviour
         {
             if (gameObject.CompareTag("Finish"))
             {
-                StartCoroutine(NyctophobiaGameManager.GetInstance().CutElectricity());
+                StartCoroutine(NyctophobiaGameLoop.GetInstance().CutElectricity());
+                NyctophobiaGameManager.GetInstance().taskType = NyctophobiaTaskList.ElectricityCut;
+                gameObject.GetComponent<Collider>().enabled = false;
             }
             else
             {
-                Debug.Log("Checkpoint reached: " + gameObject.name);
-                InformationPanel.GetInstance().tasks.Remove(gameObject.GetComponent<Task>());
-                Destroy(gameObject.GetComponent<Task>());
-                InformationPanel.GetInstance().Initialize();
-                NyctophobiaGameManager.GetInstance().checkpointCount++;
+                NyctophobiaGameLoop.GetInstance().checkpointCount++;
                 //TODO : NyctophobiaGameManager.GetInstance().checkpoints.childCount - 1 (change if to this)
-                if(NyctophobiaGameManager.GetInstance().checkpointCount == 1)
+                if (NyctophobiaGameLoop.GetInstance().checkpointCount == 1)
                 {
-                    Debug.Log("All checkpoints reached. Go to the livingroom.");
-                    NyctophobiaGameManager.GetInstance().OnAllCheckpointsReached();
+                    NyctophobiaGameManager.GetInstance().taskType = NyctophobiaTaskList.CheckpointsReached;
+                    NyctophobiaGameLoop.GetInstance().OnAllCheckpointsReached();
                 }
                 gameObject.SetActive(false);
             }
+            gameObject.GetComponent<Task>().isCompleted = true;
+            TaskManager.GetInstance().Initialize();
         }
     }
 }
