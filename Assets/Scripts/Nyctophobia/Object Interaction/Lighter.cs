@@ -14,7 +14,13 @@ public class Lighter : MonoBehaviour
         flame = transform.GetChild(0).GetComponent<ParticleSystem>();
         selfLight = transform.GetChild(0).GetChild(2).GetComponent<Light>();
         flame.Stop();
-        gameObject.GetComponent<XRGrabInteractable>().activated.AddListener(LightCandle);
+        GetComponent<XRGrabInteractable>().selectEntered.AddListener(GrabLighter);
+        GetComponent<XRGrabInteractable>().activated.AddListener(LightCandle);
+    }
+
+    private void GrabLighter(SelectEnterEventArgs arg0)
+    {
+        NyctophobiaGameManager.GetInstance().SetTaskType(NyctophobiaTaskList.LighterFound);
     }
 
     private void LightCandle(ActivateEventArgs arg0)

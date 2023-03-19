@@ -4,7 +4,7 @@ using UnityEngine.XR.Interaction.Toolkit;
 public class Torch : MonoBehaviour
 {
     private GameObject flashLight;
-
+    
     private void Start()
     {
         flashLight = transform.GetChild(0).gameObject;
@@ -16,7 +16,7 @@ public class Torch : MonoBehaviour
     {
         if (NyctophobiaGameManager.GetInstance().isElectricCut)
         {
-            NyctophobiaGameManager.GetInstance().SetTaskType(NyctophobiaTaskList.TorchDropped);
+            //NyctophobiaGameManager.GetInstance().SetTaskType(NyctophobiaTaskList.TorchDropped);
         }
         flashLight.SetActive(false);
     }
@@ -25,9 +25,9 @@ public class Torch : MonoBehaviour
     {
         if (NyctophobiaGameManager.GetInstance().isElectricCut)
         {
-            NyctophobiaGameManager.GetInstance().SetTaskType(NyctophobiaTaskList.TorchFound);
+            //NyctophobiaGameManager.GetInstance().SetTaskType(NyctophobiaTaskList.TorchFound);
             flashLight.SetActive(true);
-            StartCoroutine(FindObjectOfType<Phone>().BatteryDead());
+            //StartCoroutine(FindObjectOfType<Phone>().BatteryDead());
         } 
     }
 }

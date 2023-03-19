@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+﻿using UnityEngine.SceneManagement;
 
 public class NyctophobiaGameManager : GameManager
 {
@@ -41,4 +41,6 @@ public class NyctophobiaGameManager : GameManager
     {
         return this.taskType;
     }
+
+
 }

@@ -84,19 +84,32 @@ public class NyctophobiaTaskManager : MonoBehaviour
                 break;
             case NyctophobiaTaskList.PhoneFound:
                 titleText.text = "Bodrum kata in";
-                informationText.text = "Bodrum kata in ve feneri al. Acele et, telefonunun þarjý bitmek üzere!";
+                informationText.text = "Bodrum kata in ve mumu al. Acele et, telefonunun þarjý bitmek üzere!";
                 break;
-            case NyctophobiaTaskList.TorchFound:
-                titleText.text = "Salona geri dön";
-                informationText.text = "Salona geri dön ve feneri kullanarak odalarý aydýnlat.";
+            case NyctophobiaTaskList.CandleFound:
+                titleText.text = "Mumlarý býrak";
+                informationText.text = "Mumlarý salondaki orta sehpanýn üstüne";
                 break;
-            case NyctophobiaTaskList.TorchDropped:
-                titleText.text = "Feneri al";
-                informationText.text = "Feneri düþürdün. Tekrar al ve odalarý aydýnlat.";
+            case NyctophobiaTaskList.CandlePutOnTable:
+                titleText.text = "Çakmaðý al";
+                informationText.text = "Mutfaktan çakmaðý al.";
+                break;
+            case NyctophobiaTaskList.LighterFound:
+                titleText.text = "Salona dön";
+                informationText.text = "Çakmakla mumu yak.";
                 break;
             case NyctophobiaTaskList.PhoneBatteryDead:
                 titleText.text = "Telefonunun Þarjý Bitti";
                 informationText.text = "Telefonunu cebine koy.";
+                break;
+            case NyctophobiaTaskList.CandleLighted:
+                informationPanel.SetActive(false);
+                titleText.text = "";
+                informationText.text = "";
+                StartCoroutine(NyctophobiaGameLoop.GetInstance().GiveElectricity());
+                break;
+            case NyctophobiaTaskList.GameOver:
+                NyctophobiaGameLoop.GetInstance().GameOver();
                 break;
             default:
                 break;

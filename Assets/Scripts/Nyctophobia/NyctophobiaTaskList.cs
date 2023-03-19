@@ -7,7 +7,10 @@
     SearchForKeys,
     PhoneFound,
     PhoneDropped,
-    TorchFound,
-    TorchDropped,
+    CandleFound,
+    CandlePutOnTable,
+    LighterFound,
+    CandleLighted,
+    GameOver,
     PhoneBatteryDead
 }

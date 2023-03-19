@@ -27,6 +27,7 @@ public class NyctophobiaGameLoop : MonoBehaviour
     public Material lightMaterial;
 
     public float timeToCutElectricity;
+    public float timeToGiveElectricity;
 
     public GameObject[] lightSourceObjects;
 
@@ -65,6 +66,30 @@ public class NyctophobiaGameLoop : MonoBehaviour
     {
         Transform final = checkpoints.GetChild(checkpoints.childCount - 1);
         final.gameObject.SetActive(true);
+    }
+
+    public IEnumerator GiveElectricity()
+    {
+        yield return new WaitForSeconds(timeToGiveElectricity);
+        for (int i = 0; i < lightSources.childCount; i++)
+        {
+            lightSources.GetChild(i).gameObject.SetActive(true);
+        }
+        for (int i = 0; i < lightSourceObjects.Length; i++)
+        {
+            lightSourceObjects[i].GetComponent<Renderer>().material = lightMaterial;
+        }
+        NyctophobiaGameManager.GetInstance().SetTaskType(NyctophobiaTaskList.GameOver);
+        NyctophobiaGameManager.GetInstance().isElectricCut = false;
+        yield return new WaitForSeconds(1);
+        emergencyLight.GetComponent<Renderer>().material = darkMaterial;
+        emergencyLight.SetActive(false);
+        emergencySpot.SetActive(false);
+    }
+
+    public void GameOver()
+    {
+        NyctophobiaUIManager.GetInstance().ShowGameOverPanel();
     }
 }
 

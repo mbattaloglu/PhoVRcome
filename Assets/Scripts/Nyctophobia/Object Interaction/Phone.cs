@@ -20,7 +20,7 @@ public class Phone : MonoBehaviour
     {
         if (NyctophobiaGameManager.GetInstance().isElectricCut && isBatteryDead)
         {
-            NyctophobiaGameManager.GetInstance().SetTaskType(NyctophobiaTaskList.TorchFound);
+            //NyctophobiaGameManager.GetInstance().SetTaskType(NyctophobiaTaskList.TorchFound);
             Destroy(gameObject);
         }
     }
