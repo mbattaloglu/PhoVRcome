@@ -21,9 +21,10 @@ public class AcrophobiaBalconyTrigger : MonoBehaviour
 
     void Trigger(SelectEnterEventArgs arg0)
     {
-        Debug.Log("Triggered");
+        
         if (isPlayerInHouse)
         {
+            Debug.Log("Beamed to balcony");
             player.transform.position = balconyPoint.position;
             player.transform.rotation = balconyPoint.rotation;
             
@@ -31,6 +32,8 @@ public class AcrophobiaBalconyTrigger : MonoBehaviour
         }
         else
         {
+            Debug.Log("Beamed to house");
+
             player.transform.position = housePoint.position;
             player.transform.rotation = housePoint.rotation;
             isPlayerInHouse = true;
