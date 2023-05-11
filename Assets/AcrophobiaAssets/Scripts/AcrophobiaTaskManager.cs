@@ -8,7 +8,7 @@ public class AcrophobiaTaskManager : MonoBehaviour
     public static AcrophobiaTaskManager Instance;
 
     List<string> acrophobiaTasks;
-    List<bool> acrophobiaTasksCompleted;
+    public List<bool> acrophobiaTasksCompleted;
 
     private void Awake()
     {
@@ -24,7 +24,7 @@ public class AcrophobiaTaskManager : MonoBehaviour
 
     private void Start()
     {
-        acrophobiaTasks = new List<string>() {"enterHouse", "firstBalcony", "secondBalcony", "ThirdBalcony",
+        acrophobiaTasks = new List<string>() {"enterHouse", "firstBalcony", "secondBalcony", "thirdBalcony",
         "glider","fireEscape", "parachute"};
         foreach (string task in acrophobiaTasks)
         {

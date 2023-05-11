@@ -5,19 +5,32 @@ using UnityEngine.XR.Interaction.Toolkit;
 
 public class AcrophobiaEnterHouseTrigger : MonoBehaviour
 {
-    public Transform teleportTo;
-    GameObject player;
+    public Transform house;
+    public Transform outside;
+    public bool isPlayerInside = false;
+    AcrophobiaTaskManager taskManager;
+    TeleportationAnchor teleportationAnchor;
 
     private void Start()
     {
-        GetComponent<XRSimpleInteractable>().selectEntered.AddListener(Trigger);
-        player = GameObject.FindGameObjectWithTag("Player");
-
+        taskManager = AcrophobiaTaskManager.Instance;
+        teleportationAnchor = GetComponent<TeleportationAnchor>();
+        teleportationAnchor.selectEntered.AddListener(Trigger);
     }
 
     void Trigger(SelectEnterEventArgs arg0)
     {
-        Debug.Log("Triggered");
-        player.transform.position = teleportTo.position;
+        if (isPlayerInside)
+        {
+            teleportationAnchor.teleportAnchorTransform = outside;
+            isPlayerInside = false;
+        }
+        else
+        {
+            taskManager.acrophobiaTasksCompleted[0] = true;
+            teleportationAnchor.teleportAnchorTransform = house;
+
+            isPlayerInside = true;
+        }
     }
 }

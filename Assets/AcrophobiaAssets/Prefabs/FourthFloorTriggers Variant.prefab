@@ -17,7 +17,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3132508268885442275, guid: 21fc799ba19dc704fbd15eec054b1a1b, type: 3}
       propertyPath: balconyId
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 3132508268885442280, guid: 21fc799ba19dc704fbd15eec054b1a1b, type: 3}
       propertyPath: m_Name
@@ -25,7 +25,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4281421165865515973, guid: 21fc799ba19dc704fbd15eec054b1a1b, type: 3}
       propertyPath: m_Name
-      value: FourthFloorTriggers
+      value: FourthFloorTriggers Variant
       objectReference: {fileID: 0}
     - target: {fileID: 4821665506121714705, guid: 21fc799ba19dc704fbd15eec054b1a1b, type: 3}
       propertyPath: m_RootOrder
@@ -70,6 +70,10 @@ PrefabInstance:
     - target: {fileID: 4821665506121714705, guid: 21fc799ba19dc704fbd15eec054b1a1b, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7961850417219668064, guid: 21fc799ba19dc704fbd15eec054b1a1b, type: 3}
+      propertyPath: m_TeleportTrigger
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 21fc799ba19dc704fbd15eec054b1a1b, type: 3}

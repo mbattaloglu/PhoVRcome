@@ -17,7 +17,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3132508268885442275, guid: 21fc799ba19dc704fbd15eec054b1a1b, type: 3}
       propertyPath: balconyId
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 3132508268885442280, guid: 21fc799ba19dc704fbd15eec054b1a1b, type: 3}
       propertyPath: m_Name
@@ -25,7 +25,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4281421165865515973, guid: 21fc799ba19dc704fbd15eec054b1a1b, type: 3}
       propertyPath: m_Name
-      value: ThirdFloorTriggers
+      value: ThirdFloorTriggers Variant
       objectReference: {fileID: 0}
     - target: {fileID: 4821665506121714705, guid: 21fc799ba19dc704fbd15eec054b1a1b, type: 3}
       propertyPath: m_RootOrder

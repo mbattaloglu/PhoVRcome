@@ -11,32 +11,92 @@ public class AcrophobiaBalconyTrigger : MonoBehaviour
     GameObject player;
     public int balconyId = 1;
     public bool goToBalcony = true;
+    AcrophobiaTaskManager taskManager;
+    bool canGoToBalcony = false;
+    TeleportationAnchor teleportationAnchor;
+
 
     private void Start()
     {
-        GetComponent<XRSimpleInteractable>().selectEntered.AddListener(Trigger);
         player = GameObject.FindGameObjectWithTag("Player");
+        taskManager = AcrophobiaTaskManager.Instance;
+        teleportationAnchor = GetComponent<TeleportationAnchor>();
+        teleportationAnchor.selectEntered.AddListener(Trigger);
+        teleportationAnchor.teleportationProvider = player.GetComponent<TeleportationProvider>();
 
     }
 
     void Trigger(SelectEnterEventArgs arg0)
     {
-        
         if (isPlayerInHouse)
         {
-            Debug.Log("Beamed to balcony");
-            player.transform.position = balconyPoint.position;
-            player.transform.rotation = balconyPoint.rotation;
-            
-            isPlayerInHouse = false;
+
+            switch (balconyId)
+            {
+
+
+                case 2:
+                    if (taskManager.acrophobiaTasksCompleted[0])
+                    {
+                        canGoToBalcony = true;
+                        taskManager.acrophobiaTasksCompleted[1] = true;
+                    }
+                    else
+                    {
+                        //insert warning here
+                    }
+                    break;
+                case 3:
+                    if (taskManager.acrophobiaTasksCompleted[1])
+                    {
+                        canGoToBalcony = true;
+                        taskManager.acrophobiaTasksCompleted[2] = true;
+
+                    }
+                    else
+                    {
+                        //insert warning here
+                    }
+                    break;
+                case 4:
+                    if (taskManager.acrophobiaTasksCompleted[2])
+                    {
+                        canGoToBalcony = true;
+                        taskManager.acrophobiaTasksCompleted[3] = true;
+
+                    }
+                    else
+                    {
+                        //insert warning here
+                    }
+                    break;
+
+            }
+
+            if (canGoToBalcony)
+            {
+                teleportationAnchor.teleportAnchorTransform = balconyPoint;
+
+                isPlayerInHouse = false;
+
+                canGoToBalcony = false;
+            }
+            else
+            {
+                teleportationAnchor.teleportAnchorTransform = player.transform;
+                isPlayerInHouse = true;
+                canGoToBalcony = true;
+            }
+
+
         }
         else
         {
-            Debug.Log("Beamed to house");
+            teleportationAnchor.teleportAnchorTransform = housePoint;
 
-            player.transform.position = housePoint.position;
-            player.transform.rotation = housePoint.rotation;
             isPlayerInHouse = true;
         }
     }
+
+
 }
