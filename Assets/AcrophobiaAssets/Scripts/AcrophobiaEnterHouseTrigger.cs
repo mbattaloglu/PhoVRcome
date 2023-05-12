@@ -27,7 +27,11 @@ public class AcrophobiaEnterHouseTrigger : MonoBehaviour
         }
         else
         {
-            taskManager.acrophobiaTasksCompleted[0] = true;
+            if (!taskManager.GetTaskState(0))
+            {
+                taskManager.SetTaskState(0);
+
+            }
             teleportationAnchor.teleportAnchorTransform = house;
 
             isPlayerInside = true;

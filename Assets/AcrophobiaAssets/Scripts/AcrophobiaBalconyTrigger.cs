@@ -28,6 +28,8 @@ public class AcrophobiaBalconyTrigger : MonoBehaviour
 
     void Trigger(SelectEnterEventArgs arg0)
     {
+        canGoToBalcony = false;
+
         if (isPlayerInHouse)
         {
 
@@ -36,38 +38,54 @@ public class AcrophobiaBalconyTrigger : MonoBehaviour
 
 
                 case 2:
-                    if (taskManager.acrophobiaTasksCompleted[0])
+                    if (taskManager.GetTaskState(0))
                     {
                         canGoToBalcony = true;
-                        taskManager.acrophobiaTasksCompleted[1] = true;
+
+                        if (!taskManager.GetTaskState(1))
+                        {
+                            taskManager.SetTaskState(1);
+
+                        }
                     }
                     else
                     {
-                        //insert warning here
+                        taskManager.TaskWarning();
+                        teleportationAnchor.teleportAnchorTransform = player.transform;
                     }
                     break;
                 case 3:
-                    if (taskManager.acrophobiaTasksCompleted[1])
+                    if (taskManager.GetTaskState(1))
                     {
                         canGoToBalcony = true;
-                        taskManager.acrophobiaTasksCompleted[2] = true;
+                        if (!taskManager.GetTaskState(2))
+                        {
+                            taskManager.SetTaskState(2);
+
+                        }
 
                     }
                     else
                     {
-                        //insert warning here
+                        taskManager.TaskWarning();
+                        teleportationAnchor.teleportAnchorTransform = player.transform;
                     }
                     break;
                 case 4:
-                    if (taskManager.acrophobiaTasksCompleted[2])
+                    if (taskManager.GetTaskState(2))
                     {
                         canGoToBalcony = true;
-                        taskManager.acrophobiaTasksCompleted[3] = true;
+                        if (!taskManager.GetTaskState(3))
+                        {
+                            taskManager.SetTaskState(3);
+
+                        }
 
                     }
                     else
                     {
-                        //insert warning here
+                        taskManager.TaskWarning();
+                        teleportationAnchor.teleportAnchorTransform = player.transform;
                     }
                     break;
 
@@ -85,7 +103,7 @@ public class AcrophobiaBalconyTrigger : MonoBehaviour
             {
                 teleportationAnchor.teleportAnchorTransform = player.transform;
                 isPlayerInHouse = true;
-                canGoToBalcony = true;
+                
             }
 
 

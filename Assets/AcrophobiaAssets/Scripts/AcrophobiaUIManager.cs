@@ -1,18 +1,41 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class AcrophobiaUIManager : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    public static AcrophobiaUIManager Instance;
+    public TMP_Text tasksText;
+    public GameObject tasksWarningText;
+
+    private void Awake()
     {
-        
+        if(Instance == null)
+        {
+            Instance = this;
+        }
+        else
+        {
+            Destroy(this);
+        }
     }
 
-    // Update is called once per frame
-    void Update()
+    public void UpdateTasksText(int index, List<string> tasks)
     {
-        
+        tasksText.text = tasks[index];
+    }
+
+    //coroutine
+    public void ShowWarning()
+    {
+        StartCoroutine(nameof(warning));
+    }
+    IEnumerator warning()
+    {
+        tasksWarningText.SetActive(true);
+        yield return new WaitForSeconds(5);
+        tasksWarningText.SetActive(false);
+
     }
 }

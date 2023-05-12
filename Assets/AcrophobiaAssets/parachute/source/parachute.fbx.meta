@@ -3,7 +3,12 @@ guid: ac1c9e430727f9a49948ecfd03e92fec
 ModelImporter:
   serializedVersion: 21300
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: EX_ParachutePlayer_Mesh
+    second: {fileID: 2100000, guid: 5978e5fa91792c24caf4ed0af410c7fe, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
