@@ -3,7 +3,27 @@ guid: 9f542c6f82131e3408ed7f7a864f9c62
 ModelImporter:
   serializedVersion: 21300
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Canvas and Grip
+    second: {fileID: 2100000, guid: 24c5c0672772ebb4b91ca637cee1e299, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Cord
+    second: {fileID: 2100000, guid: 6870d196a325a8a4097861918aaaf410, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Metal
+    second: {fileID: 2100000, guid: e9e3f032410f69647939cb93e7d0ea07, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Rope
+    second: {fileID: 2100000, guid: ded6b666b1ef036479174354430f12b1, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0

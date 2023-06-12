@@ -9,13 +9,27 @@ namespace PathCreation.Examples
         public PathCreator pathCreator;
         public EndOfPathInstruction endOfPathInstruction;
         public float speed = 5;
-        float distanceTravelled;
+        public float distanceTravelled;
 
-        void Start() {
+        private void Awake()
+        {
+            if (pathCreator != null)
+            {
+
+                pathCreator.bezierPath.Space = PathSpace.xyz;
+                pathCreator.bezierPath.GlobalNormalsAngle = 90;
+                pathCreator.bezierPath.FlipNormals = false;
+            }
+        }
+
+        void Start()
+        {
             if (pathCreator != null)
             {
                 // Subscribed to the pathUpdated event so that we're notified if the path changes during the game
                 pathCreator.pathUpdated += OnPathChanged;
+
+
             }
         }
 
@@ -24,14 +38,21 @@ namespace PathCreation.Examples
             if (pathCreator != null)
             {
                 distanceTravelled += speed * Time.deltaTime;
+               
                 transform.position = pathCreator.path.GetPointAtDistance(distanceTravelled, endOfPathInstruction);
-                transform.rotation = pathCreator.path.GetRotationAtDistance(distanceTravelled, endOfPathInstruction);
+               // transform.rotation = pathCreator.path.GetRotationAtDistance(distanceTravelled, endOfPathInstruction);
+                
+
+                //transform.SetPositionAndRotation(new Vector3(pathCreator.path.GetPointAtDistance(distanceTravelled, endOfPathInstruction).x, transform.position.y,
+                    //pathCreator.path.GetPointAtDistance(distanceTravelled, endOfPathInstruction).z), pathCreator.path.GetRotationAtDistance(distanceTravelled, endOfPathInstruction));
+
             }
         }
 
         // If the path changes during the game, update the distance travelled so that the follower's position on the new path
         // is as close as possible to its position on the old path
-        void OnPathChanged() {
+        public void OnPathChanged()
+        {
             distanceTravelled = pathCreator.path.GetClosestDistanceAlongPath(transform.position);
         }
     }
