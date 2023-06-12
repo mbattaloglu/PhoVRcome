@@ -5,10 +5,9 @@ using UnityEngine.EventSystems;
 using PathCreation.Examples;
 using UnityEngine.XR.Interaction.Toolkit;
 
-public class Glider : MonoBehaviour
+public class Parachute : MonoBehaviour
 {
-
-    public static Glider Instance;
+    public static Parachute Instance;
     GameObject player;
 
     [HideInInspector] public PathFollower follower;
@@ -16,9 +15,10 @@ public class Glider : MonoBehaviour
     AcrophobiaTaskManager taskManager;
 
 
+
     private void Awake()
     {
-        if(Instance == null)
+        if (Instance == null)
         {
             Instance = this;
         }
@@ -65,39 +65,24 @@ public class Glider : MonoBehaviour
 
         Debug.Log("interacted");
 
-
     }
     void Trigger(SelectEnterEventArgs arg0)
     {
-        if (taskManager.GetTaskState(3))
+        if (taskManager.GetTaskState(4))
         {
-            if (!taskManager.GetTaskState(4))
-            {
-                taskManager.SetTaskState(4);
-
-            }
 
             teleportationAnchor.teleportAnchorTransform = this.transform;
             Interact();
-            Invoke(nameof(Ended), 20);
+            Invoke(nameof(Ended), 10);
+
         }
 
 
-
-
     }
+
     void Ended()
     {
         Debug.Log("Completed");
-        player.transform.SetParent(null);
-
-        player.GetComponent<ContinuousMoveProviderBase>().useGravity = true;
-        player.GetComponent<ContinuousMoveProviderBase>().moveSpeed = 1;
-        player.GetComponent<ContinuousMoveProviderBase>().enableStrafe = true;
-
-        DisableFollower();
-        
     }
 
 }
-

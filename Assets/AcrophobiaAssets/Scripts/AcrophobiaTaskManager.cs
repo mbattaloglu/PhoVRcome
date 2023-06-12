@@ -28,14 +28,13 @@ public class AcrophobiaTaskManager : MonoBehaviour
     private void Start()
     {
         acrophobiaTasks = new List<string>() {"enterHouse", "firstBalcony", "secondBalcony", "thirdBalcony",
-        "glider","fireEscape", "parachute"};
+        "glider", "parachute"};
         acrophobiaTaskUI = new List<string>()
         { "Task1: Enter House", "Task2: Go to one of the second floor balconies and look around.",
             "Task3: Go to one of the third floor balconies and look around.",
             "Task4: Go to one of the fourth floor balconies and look around.",
         "Task5: Go to the backyard and glide with the glider plane.",
-        "Task6: Escape from the building using fire escapes.",
-        "Task7: Wear a parachute and paraglide."};
+        "Task6: Wear a parachute and paraglide."};
         foreach (string task in acrophobiaTasks)
         {
             acrophobiaTasksCompleted.Add(false);

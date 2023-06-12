@@ -9,30 +9,45 @@ public class AcrophobiaEnterHouseTrigger : MonoBehaviour
     public Transform outside;
     public bool isPlayerInside = false;
     AcrophobiaTaskManager taskManager;
-    TeleportationAnchor teleportationAnchor;
+    XRSimpleInteractable simpleInteractable;
 
     private void Start()
     {
         taskManager = AcrophobiaTaskManager.Instance;
-        teleportationAnchor = GetComponent<TeleportationAnchor>();
-        teleportationAnchor.selectEntered.AddListener(Trigger);
+        simpleInteractable = GetComponent<XRSimpleInteractable>();
+        simpleInteractable.activated.AddListener(Trigger);
     }
 
-    void Trigger(SelectEnterEventArgs arg0)
+    public GameObject player;
+    public Camera playerHead;
+
+    public void Teleport(Transform point)
+    {
+        var rotationAngleY = point.rotation.eulerAngles.y - playerHead.transform.rotation.eulerAngles.y;
+
+        player.transform.Rotate(0, rotationAngleY, 0);
+
+        var distanceDiff = point.position - playerHead.transform.position;
+
+        player.transform.position += distanceDiff;
+    }
+
+    void Trigger(ActivateEventArgs arg0)
     {
         if (isPlayerInside)
         {
-            teleportationAnchor.teleportAnchorTransform = outside;
             isPlayerInside = false;
+            Teleport(outside);
+
         }
         else
         {
             if (!taskManager.GetTaskState(0))
             {
                 taskManager.SetTaskState(0);
+                Teleport(house);
 
             }
-            teleportationAnchor.teleportAnchorTransform = house;
 
             isPlayerInside = true;
         }
