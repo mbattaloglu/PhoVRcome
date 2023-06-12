@@ -12,7 +12,7 @@ namespace SojaExiles
 
         private void Start()
         {
-            isOpen = false; 
+            isOpen = false;
             gameObject.AddComponent<XRSimpleInteractable>();
             animator = GetComponent<Animator>();
             player = GameObject.FindWithTag("Player").transform;
@@ -21,18 +21,14 @@ namespace SojaExiles
 
         private void Interact(ActivateEventArgs arg0)
         {
-            float dist = Vector3.Distance(player.position, transform.position);
-            if (dist < 15)
+            switch (isOpen)
             {
-                switch (isOpen)
-                {
-                    case true:
-                        StartCoroutine(Close());
-                        break;
-                    case false:
-                        StartCoroutine(Open());
-                        break;
-                }
+                case true:
+                    StartCoroutine(Close());
+                    break;
+                case false:
+                    StartCoroutine(Open());
+                    break;
             }
         }
 
