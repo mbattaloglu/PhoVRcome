@@ -72,6 +72,7 @@ public class Parachute : MonoBehaviour
 
         if (taskManager.GetTaskState(4))
         {
+
             Interact();
 
             Teleport(this.transform);
@@ -100,8 +101,16 @@ public class Parachute : MonoBehaviour
 
     void Ended()
     {
-        Debug.Log("Completed");
-        completedPanel.SetActive(true);
-    }
+        taskManager.SetTaskState(5);
 
+        Debug.Log("Completed");
+        player.transform.SetParent(null);
+
+        player.GetComponent<ContinuousMoveProviderBase>().useGravity = true;
+        player.GetComponent<ContinuousMoveProviderBase>().moveSpeed = 1;
+        player.GetComponent<ContinuousMoveProviderBase>().enableStrafe = true;
+
+        DisableFollower();
+
+    }
 }

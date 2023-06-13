@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class AcrophobiaTaskManager : MonoBehaviour
 {
@@ -34,7 +35,7 @@ public class AcrophobiaTaskManager : MonoBehaviour
             "Task3: Go to one of the third floor balconies and look around.",
             "Task4: Go to one of the fourth floor balconies and look around.",
         "Task5: Go to the backyard and glide with the glider plane.",
-        "Task6: Wear a parachute and paraglide."};
+        "Task6: Wear a parachute and paraglide.", "Tasks Completed."};
         foreach (string task in acrophobiaTasks)
         {
             acrophobiaTasksCompleted.Add(false);
@@ -61,4 +62,8 @@ public class AcrophobiaTaskManager : MonoBehaviour
         uIManager.ShowWarning();
     }
 
+    public void MainMenu()
+    {
+        SceneManager.LoadScene(0);
+    }
 }
