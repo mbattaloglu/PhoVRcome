@@ -13,20 +13,31 @@ public class AcrophobiaBalconyTrigger : MonoBehaviour
     public bool goToBalcony = true;
     AcrophobiaTaskManager taskManager;
     bool canGoToBalcony = false;
-    TeleportationAnchor teleportationAnchor;
+    XRSimpleInteractable simpleInteractable;
+    Camera playerHead;
 
 
     private void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player");
         taskManager = AcrophobiaTaskManager.Instance;
-        teleportationAnchor = GetComponent<TeleportationAnchor>();
-        teleportationAnchor.selectEntered.AddListener(Trigger);
-        teleportationAnchor.teleportationProvider = player.GetComponent<TeleportationProvider>();
-
+        simpleInteractable = GetComponent<XRSimpleInteractable>();
+        simpleInteractable.activated.AddListener(Trigger);
+        playerHead = Camera.main;
     }
 
-    void Trigger(SelectEnterEventArgs arg0)
+    public void Teleport(Transform point)
+    {
+        var rotationAngleY = point.rotation.eulerAngles.y - playerHead.transform.rotation.eulerAngles.y;
+
+        player.transform.Rotate(0, rotationAngleY, 0);
+
+        var distanceDiff = point.position - playerHead.transform.position;
+
+        player.transform.position += distanceDiff;
+    }
+
+    void Trigger(ActivateEventArgs arg0)
     {
         canGoToBalcony = false;
 
@@ -51,7 +62,7 @@ public class AcrophobiaBalconyTrigger : MonoBehaviour
                     else
                     {
                         taskManager.TaskWarning();
-                        teleportationAnchor.teleportAnchorTransform = player.transform;
+                        
                     }
                     break;
                 case 3:
@@ -68,7 +79,7 @@ public class AcrophobiaBalconyTrigger : MonoBehaviour
                     else
                     {
                         taskManager.TaskWarning();
-                        teleportationAnchor.teleportAnchorTransform = player.transform;
+
                     }
                     break;
                 case 4:
@@ -85,7 +96,6 @@ public class AcrophobiaBalconyTrigger : MonoBehaviour
                     else
                     {
                         taskManager.TaskWarning();
-                        teleportationAnchor.teleportAnchorTransform = player.transform;
                     }
                     break;
 
@@ -93,7 +103,7 @@ public class AcrophobiaBalconyTrigger : MonoBehaviour
 
             if (canGoToBalcony)
             {
-                teleportationAnchor.teleportAnchorTransform = balconyPoint;
+                Teleport(balconyPoint);
 
                 isPlayerInHouse = false;
 
@@ -101,7 +111,6 @@ public class AcrophobiaBalconyTrigger : MonoBehaviour
             }
             else
             {
-                teleportationAnchor.teleportAnchorTransform = player.transform;
                 isPlayerInHouse = true;
                 
             }
@@ -110,7 +119,8 @@ public class AcrophobiaBalconyTrigger : MonoBehaviour
         }
         else
         {
-            teleportationAnchor.teleportAnchorTransform = housePoint;
+            Teleport(housePoint);
+
 
             isPlayerInHouse = true;
         }

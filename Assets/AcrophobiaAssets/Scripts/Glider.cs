@@ -12,9 +12,9 @@ public class Glider : MonoBehaviour
     GameObject player;
 
     [HideInInspector] public PathFollower follower;
-    TeleportationAnchor teleportationAnchor;
     AcrophobiaTaskManager taskManager;
-
+    XRSimpleInteractable simpleInteractable;
+    Camera playerHead;
 
     private void Awake()
     {
@@ -33,8 +33,9 @@ public class Glider : MonoBehaviour
 
     private void Start()
     {
-        teleportationAnchor = GetComponent<TeleportationAnchor>();
-        teleportationAnchor.selectEntered.AddListener(Trigger);
+        simpleInteractable = GetComponent<XRSimpleInteractable>();
+        simpleInteractable.activated.AddListener(Trigger);
+        playerHead = Camera.main;
         taskManager = AcrophobiaTaskManager.Instance;
 
     }
@@ -67,8 +68,10 @@ public class Glider : MonoBehaviour
 
 
     }
-    void Trigger(SelectEnterEventArgs arg0)
+    void Trigger(ActivateEventArgs arg0)
     {
+
+
         if (taskManager.GetTaskState(3))
         {
             if (!taskManager.GetTaskState(4))
@@ -76,16 +79,33 @@ public class Glider : MonoBehaviour
                 taskManager.SetTaskState(4);
 
             }
-
-            teleportationAnchor.teleportAnchorTransform = this.transform;
             Interact();
-            Invoke(nameof(Ended), 20);
+
+            Teleport(this.transform);
+            Invoke(nameof(Ended), 18);
+
+        }
+        else
+        {
+            taskManager.TaskWarning();
         }
 
 
 
 
     }
+
+    public void Teleport(Transform point)
+    {
+        var rotationAngleY = point.rotation.eulerAngles.y - playerHead.transform.rotation.eulerAngles.y;
+
+        player.transform.Rotate(0, rotationAngleY, 0);
+
+        var distanceDiff = point.position - playerHead.transform.position;
+
+        player.transform.position += distanceDiff;
+    }
+
     void Ended()
     {
         Debug.Log("Completed");

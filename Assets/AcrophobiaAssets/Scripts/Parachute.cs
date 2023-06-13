@@ -11,10 +11,10 @@ public class Parachute : MonoBehaviour
     GameObject player;
 
     [HideInInspector] public PathFollower follower;
-    TeleportationAnchor teleportationAnchor;
     AcrophobiaTaskManager taskManager;
-
-
+    XRSimpleInteractable simpleInteractable;
+    Camera playerHead;
+    public GameObject completedPanel;
 
     private void Awake()
     {
@@ -33,10 +33,11 @@ public class Parachute : MonoBehaviour
 
     private void Start()
     {
-        teleportationAnchor = GetComponent<TeleportationAnchor>();
-        teleportationAnchor.selectEntered.AddListener(Trigger);
-        taskManager = AcrophobiaTaskManager.Instance;
 
+        taskManager = AcrophobiaTaskManager.Instance;
+        simpleInteractable = GetComponent<XRSimpleInteractable>();
+        simpleInteractable.activated.AddListener(Trigger);
+        playerHead = Camera.main;
     }
 
     public void EnableFollower()
@@ -66,23 +67,41 @@ public class Parachute : MonoBehaviour
         Debug.Log("interacted");
 
     }
-    void Trigger(SelectEnterEventArgs arg0)
+    void Trigger(ActivateEventArgs arg0)
     {
+
         if (taskManager.GetTaskState(4))
         {
-
-            teleportationAnchor.teleportAnchorTransform = this.transform;
             Interact();
-            Invoke(nameof(Ended), 10);
+
+            Teleport(this.transform);
+            Invoke(nameof(Ended), 8);
+
+        }
+        else
+        {
+            taskManager.TaskWarning();
 
         }
 
 
     }
 
+    public void Teleport(Transform point)
+    {
+        var rotationAngleY = point.rotation.eulerAngles.y - playerHead.transform.rotation.eulerAngles.y;
+
+        player.transform.Rotate(0, rotationAngleY, 0);
+
+        var distanceDiff = point.position - playerHead.transform.position;
+
+        player.transform.position += distanceDiff;
+    }
+
     void Ended()
     {
         Debug.Log("Completed");
+        completedPanel.SetActive(true);
     }
 
 }
