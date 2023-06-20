@@ -16,7 +16,7 @@ public class Checkpoint : MonoBehaviour
             {
                 NyctophobiaGameLoop.GetInstance().checkpointCount++;
                 //TODO : NyctophobiaGameManager.GetInstance().checkpoints.childCount - 1 (change if to this)
-                if (NyctophobiaGameLoop.GetInstance().checkpointCount == 1)
+                if (NyctophobiaGameLoop.GetInstance().checkpointCount == NyctophobiaGameManager.GetInstance().checkpoints.childCount - 1)
                 {
                     NyctophobiaGameManager.GetInstance().SetTaskType(NyctophobiaTaskList.CheckpointsReached);
                     NyctophobiaGameLoop.GetInstance().OnAllCheckpointsReached();
@@ -24,6 +24,7 @@ public class Checkpoint : MonoBehaviour
                 gameObject.SetActive(false);
             }
             gameObject.GetComponent<Task>().isCompleted = true;
+                NyctophobiaTaskManager.GetInstance().Initialize();
         }
     }
 }

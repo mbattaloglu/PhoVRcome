@@ -7,8 +7,12 @@ public class BasementDoor : MonoBehaviour
     private Animator animator;
     private bool isOpen;
     private Transform player;
+
+    public GameObject warnText;
+    private bool warnStarted = false;
     private void Start()
     {
+        warnText.SetActive(false);
         isOpen = false;
         gameObject.AddComponent<XRSimpleInteractable>();
         animator = GetComponent<Animator>();
@@ -34,6 +38,7 @@ public class BasementDoor : MonoBehaviour
                     else
                     {
                         Debug.Log("You need to find the key first");
+                        StartCoroutine(WarnUser());
                     }
                     break;
             }
@@ -51,5 +56,19 @@ public class BasementDoor : MonoBehaviour
         animator.Play("Closing");
         isOpen = false;
         yield return new WaitForSeconds(.5f);
+    }
+
+    private IEnumerator WarnUser()
+    {
+        if(!warnStarted)
+        {
+            warnStarted = true;
+            warnText.SetActive(true);
+            yield return new WaitForSeconds(2);
+            warnText.SetActive(false);
+            warnStarted = false;
+        }
+
+        yield return null;
     }
 }

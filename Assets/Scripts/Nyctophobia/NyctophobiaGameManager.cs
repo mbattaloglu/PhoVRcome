@@ -1,4 +1,4 @@
-﻿using UnityEngine.SceneManagement;
+﻿using UnityEngine;
 
 public class NyctophobiaGameManager : GameManager
 {
@@ -25,6 +25,7 @@ public class NyctophobiaGameManager : GameManager
 
     public bool isElectricCut;
     public bool isKeyFound;
+    public Transform checkpoints; 
 
     private void Start()
     {

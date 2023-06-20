@@ -61,7 +61,7 @@ public class NyctophobiaTaskManager : MonoBehaviour
                 break;
             case NyctophobiaTaskList.CheckpointsReached:
                 informationText.text = "";
-                titleText.text = "Oturma odasýna geri dön.";
+                titleText.text = "Go back to the living room.";
                 break;
             case NyctophobiaTaskList.ElectricityCut:
                 informationPanel.SetActive(false);
@@ -70,37 +70,37 @@ public class NyctophobiaTaskManager : MonoBehaviour
                 break;
             case NyctophobiaTaskList.SearchForKeys:
                 informationPanel.SetActive(true);
-                titleText.text = "Anahtarlarý bul.";
-                informationText.text = "Bodrum kata inen anahtarlarý bul. Koltuðun yanýndaki çekmecelerden birinde olmalý.";
+                titleText.text = "Find the Keys";
+                informationText.text = "Find the keys of the basement. It is in the drawer under the emergency light.";
                 break;
             case NyctophobiaTaskList.SearchForPhone:
                 informationPanel.SetActive(true);
-                titleText.text = "Telefonu Bul";
-                informationText.text = "Masanýn üstünden telefonu bul ve al. Flaþý otomatik olarak açýlacaktýr.";
+                titleText.text = "Get the Phone";
+                informationText.text = "Get the phone. The flashlight will automatically open.";
                 break;
             case NyctophobiaTaskList.PhoneDropped:
-                titleText.text = "Telefonu al";
-                informationText.text = "Telefonu düþürdün. Tekrar al ve flaþý aç.";
+                titleText.text = "Get the phone";
+                informationText.text = "You dropped the phone. Get back it!";
                 break;
             case NyctophobiaTaskList.PhoneFound:
-                titleText.text = "Bodrum kata in";
-                informationText.text = "Bodrum kata in ve mumu al. Acele et, telefonunun þarjý bitmek üzere!";
+                titleText.text = "Go to the basement";
+                informationText.text = "Go basement and take candles. Hurry up, your battery is about to die!";
                 break;
             case NyctophobiaTaskList.CandleFound:
-                titleText.text = "Mumlarý býrak";
-                informationText.text = "Mumlarý salondaki orta sehpanýn üstüne";
+                titleText.text = "Drop the Candles";
+                informationText.text = "Drop to candles to the coffee table";
                 break;
             case NyctophobiaTaskList.CandlePutOnTable:
-                titleText.text = "Çakmaðý al";
-                informationText.text = "Mutfaktan çakmaðý al.";
+                titleText.text = "Get Lighter";
+                informationText.text = "Go kitchen and take lighter on the dinner table.";
                 break;
             case NyctophobiaTaskList.LighterFound:
-                titleText.text = "Salona dön";
-                informationText.text = "Çakmakla mumu yak.";
+                titleText.text = "Go Back to the Living Room ";
+                informationText.text = "Light the Candles.";
                 break;
             case NyctophobiaTaskList.PhoneBatteryDead:
-                titleText.text = "Telefonunun Þarjý Bitti";
-                informationText.text = "Telefonunu cebine koy.";
+                titleText.text = "Battery is dead.";
+                informationText.text = "Put your phone to your pocket.";
                 break;
             case NyctophobiaTaskList.CandleLighted:
                 informationPanel.SetActive(false);
