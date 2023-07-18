@@ -127,6 +127,26 @@ MonoBehaviour:
   company: Unity
   priority: 0
   required: 0
+--- !u!114 &-3484059055757175128
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c4b862ee14fb479fbfe5fffe655d3ed3, type: 3}
+  m_Name: MetaQuestTouchProControllerProfile Standalone
+  m_EditorClassIdentifier: 
+  m_enabled: 0
+  nameUi: Meta Quest Touch Pro Controller Profile
+  version: 0.0.1
+  featureIdInternal: com.unity.openxr.feature.input.metaquestpro
+  openxrExtensionStrings: XR_FB_touch_controller_pro
+  company: Unity
+  priority: 0
+  required: 0
 --- !u!114 &-3009325475609552384
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -262,6 +282,7 @@ MonoBehaviour:
   - {fileID: 3069742375127406056}
   - {fileID: 3237245354067024338}
   - {fileID: -2561605513942350741}
+  - {fileID: -3484059055757175128}
   - {fileID: -1924957639526768191}
   - {fileID: 2450307929668491312}
   - {fileID: -1714778504203375675}
@@ -370,6 +391,26 @@ MonoBehaviour:
   company: Unity
   priority: 0
   required: 0
+--- !u!114 &5175238430567168057
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c4b862ee14fb479fbfe5fffe655d3ed3, type: 3}
+  m_Name: MetaQuestTouchProControllerProfile Android
+  m_EditorClassIdentifier: 
+  m_enabled: 0
+  nameUi: Meta Quest Touch Pro Controller Profile
+  version: 0.0.1
+  featureIdInternal: com.unity.openxr.feature.input.metaquestpro
+  openxrExtensionStrings: XR_FB_touch_controller_pro
+  company: Unity
+  priority: 0
+  required: 0
 --- !u!114 &6042186056735813473
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -408,6 +449,7 @@ MonoBehaviour:
   - {fileID: 2531428012419093904}
   - {fileID: 181597208763937318}
   - {fileID: -6407521080092595832}
+  - {fileID: 5175238430567168057}
   - {fileID: -6551884700981588014}
   - {fileID: 6042186056735813473}
   - {fileID: -9220418704339347077}

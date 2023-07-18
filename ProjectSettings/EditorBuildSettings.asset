@@ -11,10 +11,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Phobia1Scene.unity
     guid: 77adf31bbeb56fa4d943c68c1c0ae537
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Phobia2Scene.unity
     guid: 0ea7088200546fa46902b6a7bad66c49
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Phobia3Scene.unity
     guid: 66b1fc9a61b4d5147b491e0fc6e7ab28
   m_configObjects:
